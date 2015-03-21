@@ -20,7 +20,7 @@
 	<window if="web" orientation="portrait"  />
 
 	<!--Desktop-specific-->
-	<window if="desktop" orientation="landscape" fullscreen="true" resizable="true" width="480" height="272" />
+	<window if="desktop" orientation="landscape" fullscreen="true" resizable="true" />
 
 	<!--Mobile-specific-->
 	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" />
