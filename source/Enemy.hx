@@ -15,7 +15,6 @@ class Enemy extends FlxSprite
         super(X, Y);
         // Make the enemy graphic
         makeGraphic(TILE_SIZE, TILE_SIZE, 0xff9400D3);
-
     }
 
     override public function update(elapsed:Float):Void
