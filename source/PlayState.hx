@@ -11,6 +11,8 @@ import flixel.text.FlxText;
 class PlayState extends FlxState
 {
 	public var player:Player;
+        // only allows one enemy
+        public var enemy:Enemy;
 	private var _level:TiledLevel;
 
 	override public function create():Void

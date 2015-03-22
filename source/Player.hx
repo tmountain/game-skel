@@ -22,46 +22,35 @@ class Player extends FlxSprite
 	/**
 	 * How big the tiles of the tilemap are.
 	 */
-	private static inline var TILE_SIZE:Int = 16;
+	private static var TILE_SIZE:Int = Reg.TILE_SIZE;
 	/**
-	 * How many pixels to move each frame. Has to be a divider of TILE_SIZE 
+	 * How many pixels to move each frame. Has to be a divider of TILE_SIZE
 	 * to work as expected (move one block at a time), because we use the
 	 * modulo-operator to check whether the next block has been reached.
 	 */
 	private static inline var MOVEMENT_SPEED:Int = 2;
-	
+
 	/**
 	 * Flag used to check if char is moving.
-	 */ 
+	 */
 	public var moveToNextTile:Bool;
 	/**
 	 * Var used to hold moving direction.
-	 */ 
+	 */
 	private var moveDirection:MoveDirection;
-	
-	#if mobile
-	private var _virtualPad:FlxVirtualPad;
-	#end
-	
+
 	public function new(X:Int, Y:Int)
 	{
 		// X,Y: Starting coordinates
 		super(X, Y);
-		
 		// Make the player graphic.
 		makeGraphic(TILE_SIZE, TILE_SIZE, 0xffc04040);
-		
-		#if mobile
-		_virtualPad = new FlxVirtualPad(FULL, NONE);
-		_virtualPad.alpha = 0.5;
-		FlxG.state.add(_virtualPad);
-		#end
 	}
-	
+
 	override public function update(elapsed:Float):Void
 	{
-		super.update(elapsed);  
-		
+		super.update(elapsed);
+
 		// Move the player to the next block
 		if (moveToNextTile)
 		{
@@ -77,31 +66,13 @@ class Player extends FlxSprite
 					x += MOVEMENT_SPEED;
 			}
 		}
-		
+
 		// Check if the player has now reached the next block
 		if ((x % TILE_SIZE == 0) && (y % TILE_SIZE == 0))
 		{
 			moveToNextTile = false;
 		}
-		
-		#if mobile
-		if (_virtualPad.buttonDown.pressed)
-		{
-			moveTo(MoveDirection.DOWN);
-		}
-		else if (_virtualPad.buttonUp.pressed)
-		{
-			moveTo(MoveDirection.UP);
-		}
-		else if (_virtualPad.buttonLeft.pressed)
-		{
-			moveTo(MoveDirection.LEFT);
-		}
-		else if (_virtualPad.buttonRight.pressed)
-		{
-			moveTo(MoveDirection.RIGHT);
-		}
-		#else
+
 		// Check for WASD or arrow key presses and move accordingly
 		if (FlxG.keys.anyPressed([DOWN, S]))
 		{
@@ -119,9 +90,8 @@ class Player extends FlxSprite
 		{
 			moveTo(MoveDirection.RIGHT);
 		}
-		#end
 	}
-	
+
 	public function moveTo(Direction:MoveDirection):Void
 	{
 		// Only change direction if not already moving
