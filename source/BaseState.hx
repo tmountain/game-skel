@@ -41,11 +41,17 @@ class BaseState extends FlxState
 
     private function buildHUD()
     {
-        this.avatar1 = new FlxSprite(Reg.TILE_SIZE, 0, IMG.AVATAR);
-        this.healthMeterFrame1 = new FlxSprite((Reg.TILE_SIZE*2)+1, 0, IMG.METER);
-        this.healthMeter1 = new HealthMeter((Reg.TILE_SIZE*2)+2, 1, 51);
-        this.energyMeterFrame1 = new FlxSprite((Reg.TILE_SIZE*2)+1, (Reg.TILE_SIZE/2), IMG.METER);
-        this.energyMeter1 = new EnergyMeter((Reg.TILE_SIZE*2)+2, Std.int(Reg.TILE_SIZE/2)+1, 30);
+        // this represents half the size of a standard tile
+        // it's used for aligning the HUD elements for player1 below
+        var tileD2:Int = Std.int(Reg.TILE_SIZE / 2);
+
+        // this block positions the hud for player1 relative to the top-left
+        // hand corner of the screen
+        this.avatar1 = new FlxSprite(tileD2, tileD2, IMG.AVATAR);
+        this.healthMeterFrame1 = new FlxSprite(Reg.TILE_SIZE+tileD2 + 1, tileD2, IMG.METER);
+        this.healthMeter1 = new HealthMeter(Reg.TILE_SIZE+tileD2 + 2, tileD2 + 1, 51);
+        this.energyMeterFrame1 = new FlxSprite(Reg.TILE_SIZE+tileD2 + 1, tileD2*2, IMG.METER);
+        this.energyMeter1 = new EnergyMeter(Reg.TILE_SIZE+tileD2 + 2, tileD2*2 + 1, 30);
 
         // something here to draw the health meter red line
         // something here to draw the health meter blue line
